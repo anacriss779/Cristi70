@@ -65,18 +65,28 @@
       justify-content: center;
     }
 
+   #welcomeBackground {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('Marco-Cristi.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: 998;
+}
+
+	/* Celulares */
+	@media (max-width: 768px) {
+
     #welcomeBackground {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background-image: url('Marco-Cristi.jpg');
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      z-index: 998;
+        background-size: contain;
+        background-color: #FDF9FA;
     }
+
+}
 
     .modal-content {
       background: rgba(255,255,255,0.94);
