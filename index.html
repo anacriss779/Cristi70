@@ -384,6 +384,22 @@
     <p class="subfrase">Una vida llena de momentos hermosos.</p>
   </div>
 </section>
+
+	  <section class="section">
+
+    <div class="card">
+
+        <h2 id="tituloMensaje"></h2>
+
+        <h1 id="nombreInvitado"></h1>
+
+        <p id="lugaresReservados"></p>
+
+        <div id="mensajeCristi"></div>
+
+    </div>
+
+</section>
 	  
     <section class="section">
       <div class="card">
@@ -541,10 +557,70 @@
 
     document.getElementById("carouselImage").src = imagenesCarrusel[indiceCarrusel];
   }
+
+// Obtener parámetro de la URL
+function obtenerParametro(nombre){
+
+    const url = new URL(window.location.href);
+
+    return url.searchParams.get(nombre);
+
+}
+
+async function cargarInvitado(){
+
+    const id = obtenerParametro("id");
+
+    const respuesta = await fetch("cristi70_datos_completo.json");
+
+    const datos = await respuesta.json();
+
+    const invitado = datos.invitados.find(i => i.id === id);
+
+    if(!invitado){
+
+        document.getElementById("nombreInvitado").innerHTML="Bienvenido";
+
+        return;
+
+    }
+
+    const mensaje = datos.mensajes[invitado.grupo];
+
+    document.getElementById("tituloMensaje").innerHTML = mensaje.titulo;
+
+    document.getElementById("nombreInvitado").innerHTML = invitado.invitado;
+
+    document.getElementById("lugaresReservados").innerHTML =
+        "Hemos reservado <strong>" +
+        invitado.total +
+        " lugares</strong> especialmente para ustedes 💗";
+
+    let texto="";
+
+    texto+="<p>"+mensaje.encabezado+"</p>";
+
+    mensaje.mensaje.forEach(linea=>{
+
+        texto+="<p>"+linea+"</p>";
+
+    });
+
+    texto+="<br>";
+
+    texto+="<strong>"+mensaje.firma.replace("\n","<br>")+"</strong>";
+
+    document.getElementById("mensajeCristi").innerHTML=texto;
+
+}
+
+cargarInvitado();		
 </script>
 	
   <audio id="bgMusic" loop preload="auto">
     <source src="musica1.mp4" type="audio/mpeg">
   </audio>
+
+	
 </body>
 </html>
