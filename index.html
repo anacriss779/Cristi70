@@ -280,6 +280,60 @@
       .modal-content { top: -20px; max-width: 285px; }
       .open-img { width: 175px; }
     }
+
+	.carousel{
+  position:relative;
+  max-width:520px;
+  margin:20px auto;
+}
+
+.carousel-img{
+  width:100%;
+  height:auto;
+  max-height:620px;
+  object-fit:contain;
+  border-radius:24px;
+  box-shadow:0 8px 22px rgba(165,69,117,.22);
+  background:#fff;
+}
+
+.carousel-btn{
+  position:absolute;
+  top:50%;
+  transform:translateY(-50%);
+  border:none;
+  background:rgba(255,240,247,.9);
+  color:#b64d7b;
+  font-size:34px;
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  cursor:pointer;
+  box-shadow:0 4px 12px rgba(0,0,0,.18);
+}
+
+.carousel-btn.prev{ left:-12px; }
+.carousel-btn.next{ right:-12px; }
+
+@media(max-width:600px){
+  .carousel{
+    max-width:92vw;
+  }
+
+  .carousel-img{
+    max-height:520px;
+    border-radius:18px;
+  }
+
+  .carousel-btn{
+    font-size:26px;
+    width:38px;
+    height:38px;
+  }
+
+  .carousel-btn.prev{ left:4px; }
+  .carousel-btn.next{ right:4px; }
+}
   </style>
 </head>
 
@@ -312,6 +366,25 @@
       <img src="Cintillo-Cristi.jpg" loading="lazy" alt="Con mucho cariño, mensaje para celebrar a Cristi" class="wide-img fade-in">
     </section>
 
+<section class="section">
+  <div class="card galeria-card">
+    <h2>Recuerdos de Cristi</h2>
+
+    <div class="carousel">
+      <button class="carousel-btn prev" onclick="moverCarrusel(-1)">❮</button>
+
+      <img id="carouselImage"
+           src="1.jpg"
+           alt="Recuerdos de Cristi"
+           class="carousel-img">
+
+      <button class="carousel-btn next" onclick="moverCarrusel(1)">❯</button>
+    </div>
+
+    <p class="subfrase">Una vida llena de momentos hermosos.</p>
+  </div>
+</section>
+	  
     <section class="section">
       <div class="card">
         <h2>Detalles del evento</h2>
@@ -442,6 +515,34 @@
     setInterval(actualizarContador, 1000);
   </script>
 
+	<script>
+  const imagenesCarrusel = [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg",
+    "4.jpg",
+    "5.jpg",
+    "6.jpg",
+    "7.jpg"
+  ];
+
+  let indiceCarrusel = 0;
+
+  function moverCarrusel(direccion){
+    indiceCarrusel += direccion;
+
+    if(indiceCarrusel < 0){
+      indiceCarrusel = imagenesCarrusel.length - 1;
+    }
+
+    if(indiceCarrusel >= imagenesCarrusel.length){
+      indiceCarrusel = 0;
+    }
+
+    document.getElementById("carouselImage").src = imagenesCarrusel[indiceCarrusel];
+  }
+</script>
+	
   <audio id="bgMusic" loop preload="auto">
     <source src="musica1.mp4" type="audio/mpeg">
   </audio>
